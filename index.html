@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Allie 🎀</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg1:#ffe3ef; --bg2:#ffd0e3; --card:#fff; --text:#7a2a4d; --accent:#ff6fa5; --accent2:#ff9ec4; --soft:#fff0f6;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg1:#2a1220; --bg2:#3a1830; --card:#3d2033; --text:#ffd6e6; --accent:#ff6fa5; --accent2:#c24c80; --soft:#4a2840;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg1:#2a1220; --bg2:#3a1830; --card:#3d2033; --text:#ffd6e6; --accent:#ff6fa5; --accent2:#c24c80; --soft:#4a2840;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:"Segoe Print","Comic Sans MS","Chalkboard SE",system-ui,sans-serif;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:24px 16px;overflow-x:hidden;
+}
+.card{
+  position:relative;z-index:2;background:var(--card);
+  max-width:460px;width:100%;border-radius:28px;padding:36px 26px 30px;
+  text-align:center;box-shadow:0 12px 40px rgba(255,111,165,.3);
+  border:3px dashed var(--accent2);
+}
+.bow{font-size:64px;display:block;animation:bob 2.4s ease-in-out infinite}
+h1{margin:6px 0 4px;font-size:30px;color:var(--accent)}
+.sub{margin:0 0 18px;font-size:15px;opacity:.85}
+.msg{
+  background:var(--soft);border-radius:18px;padding:18px 16px;
+  font-size:17px;line-height:1.65;text-align:left;
+}
+.msg p{margin:0 0 12px}
+.msg p:last-child{margin:0}
+.btns{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;min-height:52px;position:relative}
+button{
+  font:inherit;font-size:17px;border:none;border-radius:999px;padding:12px 22px;cursor:pointer;
+  transition:transform .15s;
+}
+button:active{transform:scale(.94)}
+#yes{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(255,111,165,.45)}
+#yes:hover{transform:scale(1.06)}
+#no{background:var(--soft);color:var(--text);border:2px solid var(--accent2)}
+.thanks{display:none;margin-top:20px;font-size:20px;color:var(--accent);line-height:1.5}
+.thanks.show{display:block;animation:pop .5s ease}
+.heart{
+  position:fixed;bottom:-40px;z-index:1;pointer-events:none;
+  animation:rise linear forwards;
+}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+@keyframes bob{50%{transform:translateY(-8px) rotate(6deg)}}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+</head>
+<body>
+<main class="card">
+  <div id="p1">
+  <span class="bow">🎀</span>
+  <h1>Hi Allie!</h1>
+  <p class="sub">I made this little page just for you 💕</p>
+
+  <div class="msg">
+    <p>I’m sorry for playing games late at night. 🌙🎮</p>
+    <p>And if you ever feel like you’re not valuable, I’m so sorry for that. You are, truly. 🌷</p>
+    <p>I hope you accept my sorry. That’s why I made this cute web for you, Allie 🎀</p>
+  </div>
+
+  <div class="btns" id="btns">
+    <button id="yes">Accept sorry 💖</button>
+    <button id="no">Not yet 🙈</button>
+  </div>
+
+  </div>
+
+  <div id="p2" hidden>
+    <span class="bow">🥺</span>
+    <h1>Wait, Allie…</h1>
+    <div class="msg">
+      <p>Are you sure you are not angry with me? 💭</p>
+      <p>I’m really sorry. 🎀</p>
+      <p>Tumi rag koro nai? Sorry too 🥺💕</p>
+    </div>
+    <div class="btns" id="btns2">
+      <button id="yes2">Yes, I’m sure 💖</button>
+      <button id="no2">Still a little angry 😤</button>
+    </div>
+  </div>
+
+  <div class="thanks" id="thanks">Yay! Thank you, Allie! 🥹💗<br>You mean a lot to me. 🎀</div>
+</main>
+
+<script>
+function spawn(n){
+  var icons=["💖","🎀","💗","🌸","✨","💕"];
+  for(var i=0;i<n;i++){
+    var h=document.createElement("div");
+    h.className="heart";
+    h.textContent=icons[Math.floor(Math.random()*icons.length)];
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(16+Math.random()*28)+"px";
+    h.style.animationDuration=(4+Math.random()*5)+"s";
+    h.style.animationDelay=(Math.random()*1.5)+"s";
+    document.body.appendChild(h);
+    (function(el){setTimeout(function(){el.remove()},11000)})(h);
+  }
+}
+spawn(12);
+setInterval(function(){spawn(2)},1800);
+
+function showView(){
+  var two=location.hash==="#sure";
+  document.getElementById("p1").hidden=two;
+  document.getElementById("p2").hidden=!two;
+}
+window.addEventListener("hashchange",showView);
+showView();
+document.getElementById("yes").addEventListener("click",function(){
+  spawn(25);
+  location.hash="sure";
+  showView();
+});
+document.getElementById("yes2").addEventListener("click",function(){
+  spawn(60);
+  document.getElementById("p2").hidden=true;
+  document.getElementById("thanks").classList.add("show");
+});
+
+var no=document.getElementById("no");
+var tries=0;
+var lines=["Not yet 🙈","Pretty please? 🥺","Pleaseee 🎀","I’ll be good! 💕","Last chance 😭"];
+function dodge(){
+  tries++;
+  no.textContent=lines[Math.min(tries,lines.length-1)];
+  var x=(Math.random()-0.5)*160, y=(Math.random()-0.5)*70;
+  no.style.transform="translate("+x+"px,"+y+"px)";
+}
+no.addEventListener("mouseenter",dodge);
+no.addEventListener("click",dodge);
+var no2=document.getElementById("no2");
+var tries2=0;
+var lines2=["Still a little angry 😤","Really? 🥺","I’m so sorry 🎀","Forgive me? 💕","Please? 😭"];
+function dodge2(){
+  tries2++;
+  no2.textContent=lines2[Math.min(tries2,lines2.length-1)];
+  no2.style.transform="translate("+((Math.random()-0.5)*160)+"px,"+((Math.random()-0.5)*70)+"px)";
+}
+no2.addEventListener("mouseenter",dodge2);
+no2.addEventListener("click",dodge2);
+</script>
+</body>
+</html>
